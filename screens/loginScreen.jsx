@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from "styled-components/native";
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
+import firebase from "../database/firebase"
 
 const Container = styled.View `
     background-color: #f9fafd;
@@ -32,10 +33,22 @@ const ForgotButton = styled.TouchableOpacity `
     margin-top: 15px;
 `
 
-
 const loginScreen = ({navigation}) => {
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+    const login =()=>{
+        if(email== "" && password==""){
+            console.log("datos vacíos")
+        }
+        else{
+            firebase.auth().signInWithEmailAndPassword(email, password).then((response)=>{
+                console.log("datos correctos")
+            
+            }).catch((error)=>{
+                console.log("credenciales invalidas")
+            })
+        }
+    } 
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     return (
        <Container>
@@ -58,7 +71,7 @@ const loginScreen = ({navigation}) => {
            />
            <FormButton
                 buttonTitle = "Sing In"
-                onPress = {() => alert('Sing in clicked')}
+                onPress = {() => login()}
            />
            <ForgotButton onPress={()=> navigation.navigate('Singup')}>
             <NavButtonText>Don't have an account? Create here</NavButtonText>
