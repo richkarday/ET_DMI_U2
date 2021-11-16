@@ -41,7 +41,8 @@ const loginScreen = ({navigation}) => {
         else{
             firebase.auth().signInWithEmailAndPassword(email, password).then((response)=>{
                 console.log("datos correctos")
-            
+                navigation.navigate('Tabs')
+                localStorage.setItem('user', response['user']['uid'])
             }).catch((error)=>{
                 console.log("credenciales invalidas")
             })

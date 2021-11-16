@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import loginScreen from "./screens/loginScreen"
 import SingupScreen from './screens/SingupScreen';
+import Tabs from './navegation/tabs';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,6 +15,8 @@ export default function App() {
      <Stack.Navigator>
        <Stack.Screen name="login" component={loginScreen} options={{ headerShown: false }}/>
        <Stack.Screen name={'Singup'} component={SingupScreen}/>
+        <Stack.Screen name={'Tabs'} component={Tabs} options={{ headerShown: false }}/>
+
      </Stack.Navigator>
    </NavigationContainer>
   );
