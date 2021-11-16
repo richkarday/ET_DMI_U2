@@ -1,12 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React,{useState,useEffect} from 'react';
 import { View, Alert, Button, TextInput, TouchableOpacity, Text, StyleSheet, SnapshotViewIOSBase} from "react-native";
-import {Accordion, Card, InputGroup, ListGroup, Modal} from 'react-bootstrap';
 import { useIsFocused } from "@react-navigation/core";
+import { ListItem, Avatar } from 'react-native-elements'
 
 import { Ionicons } from '@expo/vector-icons';
 import firebase from '../database/firebase'
-import "bootstrap/dist/css/bootstrap.min.css";
+
 
 function HomeScreen() {
   const [input, setInput] = useState('');
@@ -85,68 +85,46 @@ function HomeScreen() {
 
     return (
       <View>
-    <Accordion defaultActiveKey="0">
-     <Accordion.Item eventKey="0">
-      <Accordion.Header>Add A New Activity TO DO</Accordion.Header>
-      <Accordion.Body>
-      <InputGroup className="mb-3">
-    <InputGroup.Text id="inputGroup-sizing-default">TO DO</InputGroup.Text>
     <input value={input} onInput={e => setInput(e.target.value)} />
-      </InputGroup>
       <Button title={"ADD"} onPress={createItem}/>
-      </Accordion.Body>
-     </Accordion.Item>
-     <Accordion.Item eventKey="1">
-      <Accordion.Header>MY ACTIVITIES TO DO</Accordion.Header>
-      <Accordion.Body>
         {
-
         list.map((item, index) => (
-          <Modal.Dialog key={item.id}>
-          <Modal.Header >
-            <Modal.Title>{item.title}</Modal.Title>
-          </Modal.Header>
-          <Modal.Footer>
-            <TouchableOpacity key={index}
+          <ListItem key={item.id} bottomDivider>
+          <ListItem.Content>
+            <ListItem.Title>{item.title}</ListItem.Title>
+            <ListItem.Subtitle>  <TouchableOpacity key={index}
       onPress={
         event => {
         moveToDone(item.id)}
-      }> <Ionicons size={'30px'} name="checkmark"/> </TouchableOpacity>
-<TouchableOpacity key={index}
+      }> <Ionicons size={'30px'} name="checkmark"/> </TouchableOpacity> 
+      <TouchableOpacity key={index}
         onPress={event => {removeTODO(item.id)}}>
          <Ionicons size={'30px'} name="close"/> 
         </TouchableOpacity>
-          </Modal.Footer>
-        </Modal.Dialog>
+      </ListItem.Subtitle>
+          </ListItem.Content>
+        </ListItem>
         ))}
-      </Accordion.Body>
-  </Accordion.Item>
-  <Accordion.Item eventKey="2">
-    <Accordion.Header>ACTIVITIES DONE!!</Accordion.Header>
-    <Accordion.Body>
+        <Text> DONE!!</Text>
      {
 
         done.map((item, index) => (
-          <Modal.Dialog key={item.id}>
-          <Modal.Header closeButton>
-            <Modal.Title>{item.title}</Modal.Title>
-          </Modal.Header>
-          <Modal.Footer>
-          <TouchableOpacity key={index}
+          <ListItem key={item.id}>
+          <ListItem.Content>
+            <ListItem.Title>{item.title}</ListItem.Title>
+            <ListItem.Subtitle>
+            <TouchableOpacity
         onPress={event => {moveToList(item.id)}}>
          <Ionicons size={'30px'} name="checkmark"/> 
         </TouchableOpacity>
-        <TouchableOpacity key={index}
+        <TouchableOpacity
         onPress={event => {removeTODO(item.id)}}>
          <Ionicons size={'30px'} name="close"/> 
         </TouchableOpacity>
-
-          </Modal.Footer>
-        </Modal.Dialog>
+            </ListItem.Subtitle>
+          </ListItem.Content>
+        </ListItem>
         ))}
-    </Accordion.Body>
-  </Accordion.Item>
-</Accordion>
 </View>
     );
   }
