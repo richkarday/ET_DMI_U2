@@ -22,8 +22,8 @@ export function ProfileScreen ({navigation}){
   const [modalPreview, setModalPreview]= useState(false);
   const camRef= useRef(null);
   const profile_pic='https://firebasestorage.googleapis.com/v0/b/galleryapp-dfaf7.appspot.com/o/';
-  const profile_pict = `https://firebasestorage.googleapis.com/v0/b/etdmiu2.appspot.com/o/images%2Fprofile_pick_${localStorage.getItem('user')}?alt=media&`
-  const [image, setImage] = useState(null);  
+  const profile_pict = `https://firebasestorage.googleapis.com/v0/b/etdmiu2.appspot.com/o/images%2Fprofile_pick_${localStorage.getItem('user')}?alt=media&&id=${Math.random()}`
+  let [image, setImage] = useState(null);  
   useEffect(() => {
     (async () => {
       if (Platform.OS !== 'web') {

@@ -134,7 +134,7 @@ function HomeScreen() {
           <Modal.Footer>
           <TouchableOpacity
         onPress={event => {moveToList(item.id)}}>
-         <Ionicons size={'30px'} name="checkmark"/> 
+         <Ionicons size={'30px'} name="arrow-back"/> 
         </TouchableOpacity>
         <TouchableOpacity
         onPress={event => {removeTODO(item.id)}}>
